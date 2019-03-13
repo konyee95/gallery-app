@@ -1,0 +1,60 @@
+.root {
+  flex-grow: 1;
+}
+.appBar {
+  position: "relative";
+}
+.menuButton {
+  margin-left: -18;
+  margin-right: 10;
+}
+.userInfo {
+  display: "flex";
+  flex-direction: "row";
+  padding: 20px;
+}
+.userDetail {
+  max-width: 400;
+  margin: "0 auto";
+}
+.image {
+  width: 50;
+  height: 50;
+}
+.img {
+  margin: 'auto';
+  display: 'block';
+  max-width: '100%';
+  max-height: '100%';
+  padding-top:20px
+}
+.userStatus {
+  display: "flex";
+  flex-direction: "row";
+  padding:50px
+}
+.userLocationJob {
+  align-content: center
+}
+.detailIcon {
+  display: flex;
+  justify-content: center;
+}
+.photoListRoot{
+  display: 'flex';
+  flex-wrap: 'wrap';
+  justify-content: 'space-around';
+  overflow: 'hidden';
+}
+.gridDetailList {
+  display: "flex";
+  flex: 1;
+  justify-content: 'center';
+}
+.cardMedia {
+  height: 0;
+  padding-top: '56%'
+}
+.actions {
+  display: 'flex';
+}
