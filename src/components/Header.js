@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import compose from "recompose/compose";
+import { updateName } from "../actions";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import IconButton from "@material-ui/core/IconButton";
@@ -9,6 +12,58 @@ import ImageIcon from "@material-ui/icons/Image";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
+
+class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  componentWillReceiveProps(props) {
+    console.log(props.names)
+  }
+
+  handleChange(event) {
+    this.props.updateName(event.target.value);
+  }
+
+  render() {
+    const { classes } = this.props;
+    return (
+      <React.Fragment>
+        <CssBaseline />
+        <AppBar position="static" color="primary" className="appBar">
+          <Toolbar variant="dense">
+            <IconButton
+              className="menuButton"
+              color="inherit"
+              aria-label="Menu"
+            >
+              <ImageIcon />
+            </IconButton>
+            <Typography variant="h6" color="inherit">
+              Gallery Web App
+            </Typography>
+            <div className={classes.grow} />
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="Search by username"
+                onChange={this.handleChange}
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput
+                }}
+              />
+            </div>
+          </Toolbar>
+        </AppBar>
+      </React.Fragment>
+    );
+  }
+}
 
 const styles = theme => ({
   grow: {
@@ -57,42 +112,17 @@ const styles = theme => ({
   }
 });
 
-class Header extends Component {
-  render() {
-    const { classes } = this.props;
-    return (
-      <React.Fragment>
-        <CssBaseline />
-        <AppBar position="static" color="primary" className="appBar">
-          <Toolbar variant="dense">
-            <IconButton
-              className="menuButton"
-              color="inherit"
-              aria-label="Menu"
-            >
-              <ImageIcon />
-            </IconButton>
-            <Typography variant="h6" color="inherit">
-              Gallery Web App
-            </Typography>
-            <div className={classes.grow} />
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-              <InputBase
-                placeholder="Search by username"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput
-                }}
-              />
-            </div>
-          </Toolbar>
-        </AppBar>
-      </React.Fragment>
-    );
+const mapStateToProps = state => {
+  return {
+    names: state.names
   }
 }
 
-export default withStyles(styles)(Header);
+const mapDispatchToProps = {
+  updateName: updateName
+}
+
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps, mapDispatchToProps)
+)(Header);

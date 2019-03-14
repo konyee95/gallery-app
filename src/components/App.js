@@ -1,14 +1,15 @@
 import React, { Component } from "react";
+import { Provider } from "react-redux";
 import axios from "axios";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import store from "../store";
 import Header from "./Header";
-import UserInfo from "./UserInfo";
 import Gallery from "./Gallery";
 
 const theme = createMuiTheme({
   palette: {
-    primary: { main: "#512DA8", contrastText: "#ffffff" }, 
-    secondary: { main: "#FF4081", contrastText: "#000000" } 
+    primary: { main: "#512DA8", contrastText: "#ffffff" },
+    secondary: { main: "#FF4081", contrastText: "#000000" }
   },
   typography: { useNextVariants: true }
 });
@@ -54,11 +55,10 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider theme={theme}>
-        <React.Fragment>
+        <Provider store={store}>
           <Header />
-          <UserInfo data={this.state.data} />
-          <Gallery projects={this.state.projects} />
-        </React.Fragment>
+          <Gallery data={this.state.data} projects={this.state.projects} />
+        </Provider>
       </MuiThemeProvider>
     );
   }

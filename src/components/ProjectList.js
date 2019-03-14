@@ -26,8 +26,10 @@ class ProjectList extends Component {
     }
     const { projects } = data;
     return projects.map(project => (
-      <GridListTile key={project.id}  style={{ padding: '10px' }}>
-        <img src={this.getProjectCover(project)} alt={project.name} />
+      <GridListTile key={project.id} style={{ padding: "10px" }}>
+        <a href="project.url">
+          <img src={this.getProjectCover(project)} alt={project.name} />
+        </a>
         <GridListTileBar title={project.name} />
       </GridListTile>
     ));
@@ -36,7 +38,7 @@ class ProjectList extends Component {
   render() {
     return (
       <div className="photoListRoot">
-        <GridList style={{ margin: 5 }} cellHeight={250} cols={3} >
+        <GridList style={{ margin: 5 }} cellHeight={250} cols={3}>
           {this.renderProject()}
         </GridList>
       </div>
