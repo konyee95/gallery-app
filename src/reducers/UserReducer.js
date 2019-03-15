@@ -17,8 +17,9 @@ const INITIAL_STATE = {
   views: "",
   followers: "",
   following: "",
-  projects:[],
-  loaded: null
+  projects: [],
+  loaded: null,
+  error: null
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -49,15 +50,25 @@ export default (state = INITIAL_STATE, action) => {
         url,
         views,
         followers,
-        following
+        following,
+        loaded: true,
+        error: null
       };
     case GET_PROJECT_SUCCESS:
       console.log(action.payload);
       const { projects } = action.payload;
-      return {...state, projects};
+      return { ...state, projects, loaded: true, error: null };
     case GET_DATA_FAIL:
     case GET_PROJECT_FAIL:
-      return INITIAL_STATE;
+      console.log(action.payload.response);
+      const error  = action.payload.response;
+      return {
+        ...INITIAL_STATE,
+        error: {
+          "status": error.status,
+          "statusText": error.statusText
+        }
+      };
     default:
       return state;
   }
