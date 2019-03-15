@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getData } from "../actions";
-import Loading from "./Loading";
+import Loading from "../components/Loading";
 import Header from "../components/Header";
 import Gallery from "../components/Gallery";
 import Typography from "@material-ui/core/Typography";
@@ -17,11 +17,10 @@ class Main extends Component {
 
   hasLoaded() {
     const { loaded, error } = this.props.user;
-    console.log(error);
     if (loaded === true && error === null) {
       return <Gallery />;
     } else if (loaded === null && error === null) {
-      return <Loading />;
+      return <div className="errorContainer"><Loading /></div>;
     } else {
       return (
         <div className="errorContainer">
