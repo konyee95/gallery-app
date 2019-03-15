@@ -23,9 +23,6 @@ class ProjectList extends Component {
 
   renderProject() {
     const projects = this.props.projects;
-    if (projects.length === 0) {
-      return <CircularProgress color="primary" />;
-    }
     return projects.map(project => (
       <GridListTile key={project.id} style={{ padding: "10px" }}>
         <a href={project.url}>

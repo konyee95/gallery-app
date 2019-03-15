@@ -15,10 +15,11 @@ class UserInfo extends Component {
     this.getProfileDescription = this.getProfileDescription.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps)
+  }
+
   getProfileDescription(sections) {
-    if (sections == null) {
-      return <CircularProgress color="primary" />;
-    }
     const description =
       sections[Object.keys(sections)[Object.keys(sections).length - 1]];
 
@@ -30,9 +31,6 @@ class UserInfo extends Component {
   }
 
   getProfilePicture(images) {
-    if (images == null) {
-      return <CircularProgress color="primary" />;
-    }
     const imageUrl =
       images[Object.keys(images)[Object.keys(images).length - 1]];
     return imageUrl;
