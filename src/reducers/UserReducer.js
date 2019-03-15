@@ -55,12 +55,10 @@ export default (state = INITIAL_STATE, action) => {
         error: null
       };
     case GET_PROJECT_SUCCESS:
-      console.log(action.payload);
       const { projects } = action.payload;
       return { ...state, projects, loaded: true, error: null };
     case GET_DATA_FAIL:
     case GET_PROJECT_FAIL:
-      console.log(action.payload.response);
       const error  = action.payload.response;
       return {
         ...INITIAL_STATE,

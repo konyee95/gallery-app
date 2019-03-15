@@ -14,10 +14,6 @@ class UserInfo extends Component {
     this.getProfileDescription = this.getProfileDescription.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps)
-  }
-
   getProfileDescription(sections) {
     const description =
       sections[Object.keys(sections)[Object.keys(sections).length - 1]];
@@ -37,7 +33,6 @@ class UserInfo extends Component {
 
   render() {
     const {
-      username,
       images,
       display_name,
       views,

@@ -20,23 +20,15 @@ class Header extends Component {
     this.handleKeyUp = this.handleKeyUp.bind(this);
   }
 
-  componentDidMount() {
-    // console.log(this.props.user);
-  }
-
-  componentWillReceiveProps(props) {
-    console.log(props.names)
-  }
-
   handleChange(event) {
     this.props.updateName(event.target.value);
   }
 
   handleKeyUp(event) {
-    if (event.charcode === 13 || event.key === 'Enter') {
-      console.log("clicked enter")
-      console.log(event.target.value)
-      this.props.getData(event.target.value)
+    if (event.charcode === 13 || event.key === 'Enter') {     
+      if (event.target.value !== ""){
+        this.props.getData(event.target.value)
+      }
     }
   }
 
