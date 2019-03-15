@@ -7,7 +7,7 @@ import {
 } from "./types";
 
 export const getData = username => {
-  const apiKey = "pqfCQK6oyFGno7n6TqiGip8XJaCOfRHr";
+  const apiKey = "c2lvlKL8AZ1P8Omm20shJc2hcZHYoE3e";
   return dispatch => {
     axios
       .get(`https://api.behance.net/v2/users/${username}?client_id=${apiKey}`)
@@ -29,14 +29,14 @@ export const getData = username => {
           .catch(error =>
             dispatch({
               type: GET_PROJECT_FAIL,
-              payload: error.error
+              payload: error
             })
           );
       })
       .catch(error =>
         dispatch({
           type: GET_DATA_FAIL,
-          payload: error.error
+          payload: error
         })
       );
   };
