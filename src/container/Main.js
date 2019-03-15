@@ -25,7 +25,7 @@ class Main extends Component {
     } else {
       return (
         <div className="errorContainer">
-            <img src={require("../images/404.gif")} />
+            <img src={require("../images/404.gif")} alt="404 gif"/>
             <Typography
                 variant="h5"
                 align="center"
