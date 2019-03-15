@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import Avatar from "@material-ui/core/Avatar";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import RemoveRedEyeIcon from "@material-ui/icons/RemoveRedEye";
@@ -52,11 +54,10 @@ class ProjectDetail extends Component {
   }
 
   renderProject() {
-    const data = this.props.projects;
-    if (data == null) {
-      return "loading";
+    const projects = this.props.projects;
+    if(projects.length === 0) {
+      return <CircularProgress color="primary" />;
     }
-    const { projects } = data;
     return projects.map(project => (
       <Card
         key={project.id}
@@ -110,21 +111,27 @@ class ProjectDetail extends Component {
 
   render() {
     return (
-      <React.Fragment>
-        <div
-          style={{
-            display: "flex",
-            flex: 1,
-            flexDirection: "column",
-            justifyContent: "center",
-            alignContent: "center"
-          }}
-        >
-          {this.renderProject()}
-        </div>
-      </React.Fragment>
+      <div
+        style={{
+          display: "flex",
+          flex: 1,
+          flexDirection: "column",
+          justifyContent: "center",
+          alignContent: "center"
+        }}
+      >
+        {this.renderProject()}
+      </div>
     );
   }
 }
 
-export default ProjectDetail;
+const mapStateToProps = state => {
+  return {
+    projects: state.user.projects
+  };
+};
+
+export default connect(
+  mapStateToProps,{}
+)(ProjectDetail);

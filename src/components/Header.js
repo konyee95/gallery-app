@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import compose from "recompose/compose";
-import { updateName } from "../actions";
+import { updateName, getData } from "../actions";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import IconButton from "@material-ui/core/IconButton";
@@ -17,6 +17,11 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
+    this.handleKeyUp = this.handleKeyUp.bind(this);
+  }
+
+  componentDidMount() {
+    // console.log(this.props.user);
   }
 
   componentWillReceiveProps(props) {
@@ -25,6 +30,14 @@ class Header extends Component {
 
   handleChange(event) {
     this.props.updateName(event.target.value);
+  }
+
+  handleKeyUp(event) {
+    if (event.charcode === 13 || event.key === 'Enter') {
+      console.log("clicked enter")
+      console.log(event.target.value)
+      this.props.getData(event.target.value)
+    }
   }
 
   render() {
@@ -52,6 +65,7 @@ class Header extends Component {
               <InputBase
                 placeholder="Search by username"
                 onChange={this.handleChange}
+                onKeyUp={this.handleKeyUp}
                 classes={{
                   root: classes.inputRoot,
                   input: classes.inputInput
@@ -114,12 +128,14 @@ const styles = theme => ({
 
 const mapStateToProps = state => {
   return {
-    names: state.names
+    names: state.names,
+    user: state.user
   }
 }
 
 const mapDispatchToProps = {
-  updateName: updateName
+  updateName,
+  getData
 }
 
 export default compose(

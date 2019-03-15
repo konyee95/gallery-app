@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
@@ -20,14 +22,13 @@ class ProjectList extends Component {
   }
 
   renderProject() {
-    const data = this.props.projects;
-    if (data == null) {
-      return "loading";
+    const projects = this.props.projects;
+    if (projects.length === 0) {
+      return <CircularProgress color="primary" />;
     }
-    const { projects } = data;
     return projects.map(project => (
       <GridListTile key={project.id} style={{ padding: "10px" }}>
-        <a href="project.url">
+        <a href={project.url}>
           <img src={this.getProjectCover(project)} alt={project.name} />
         </a>
         <GridListTileBar title={project.name} />
@@ -46,4 +47,12 @@ class ProjectList extends Component {
   }
 }
 
-export default ProjectList;
+const mapStateToProps = state => {
+  return {
+    projects: state.user.projects
+  };
+};
+
+export default connect(
+  mapStateToProps, {}
+)(ProjectList);
