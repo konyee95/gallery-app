@@ -17,3 +17,11 @@ yarn
 ```
 yarn start
 ```
+
+## Notes
+```
+If you encounter CORS error,
+
+please use this chrome plugin:
+
+https://chrome.google.com/webstore/detail/moesif-orign-cors-changer/digfbfaphojjndkpccljibejjbppifbc
