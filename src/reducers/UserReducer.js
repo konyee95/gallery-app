@@ -19,7 +19,10 @@ const INITIAL_STATE = {
   following: "",
   projects: [],
   loaded: null,
-  error: null
+  error: {
+    "status": "",
+    "statusText": ""
+  }
 };
 
 export default (state = INITIAL_STATE, action) => {

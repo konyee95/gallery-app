@@ -11,30 +11,49 @@ class Main extends Component {
     super(props);
     this.hasLoaded = this.hasLoaded.bind(this);
   }
+
   componentDidMount() {
     this.props.getData("matiascorea");
   }
 
   hasLoaded() {
     const { loaded, error } = this.props.user;
+    console.log(error)
     if (loaded === true && error === null) {
       return <Gallery />;
     } else if (loaded === null && error === null) {
       return <div className="errorContainer"><Loading /></div>;
     } else {
-      return (
-        <div className="errorContainer">
-            <img src={require("../images/404.gif")} alt="404 gif"/>
-            <Typography
-                variant="h5"
-                align="center"
-                color="textPrimary"
-                gutterBottom
-            >
-                Oops, User not exist. Please try again
-            </Typography>
-        </div> 
-      );
+        if (error.status === ""){
+          return (
+            <div className="errorContainer">
+                <img src={require("../images/404.gif")} alt="404 gif"/>
+                <Typography
+                    variant="h5"
+                    align="center"
+                    color="textPrimary"
+                    gutterBottom
+                >
+                    Please install CORS plugin...
+                </Typography>
+            </div> 
+          );
+        }else if (error.status === 404){
+          return (
+              <div className="errorContainer">
+                  <img src={require("../images/404.gif")} alt="404 gif"/>
+                  <Typography
+                      variant="h5"
+                      align="center"
+                      color="textPrimary"
+                      gutterBottom
+                  >
+                      Oops, User not exist. Please try again
+                  </Typography>
+              </div> 
+                );
+        }
+      
     }
   }
 
