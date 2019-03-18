@@ -63,13 +63,23 @@ export default (state = INITIAL_STATE, action) => {
     case GET_DATA_FAIL:
     case GET_PROJECT_FAIL:
       const error  = action.payload.response;
-      return {
-        ...INITIAL_STATE,
-        error: {
-          "status": error.status,
-          "statusText": error.statusText
-        }
-      };
+      if (error === undefined) {
+        return {
+          ...INITIAL_STATE,
+          error: {
+            "status": 501,
+            "statusText": "Please install CORS plugin..."
+          }
+        };
+      }else {
+        return {
+          ...INITIAL_STATE,
+          error: {
+            "status": error.status,
+            "statusText": error.statusText
+          }
+        };
+      }
     default:
       return state;
   }

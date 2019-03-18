@@ -18,13 +18,12 @@ class Main extends Component {
 
   hasLoaded() {
     const { loaded, error } = this.props.user;
-    console.log(error)
     if (loaded === true && error === null) {
       return <Gallery />;
     } else if (loaded === null && error === null) {
       return <div className="errorContainer"><Loading /></div>;
     } else {
-        if (error.status === ""){
+        if (error.status === 501){
           return (
             <div className="errorContainer">
                 <img src={require("../images/404.gif")} alt="404 gif"/>
