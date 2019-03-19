@@ -28,7 +28,6 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case GET_DATA_SUCCESS:
-    console.log(action.payload)
       const { user } = action.payload;
       const {
         username,

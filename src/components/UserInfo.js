@@ -17,15 +17,13 @@ class UserInfo extends Component {
   getProfileDescription(sections) {
     if (Object.keys(sections).length !== 0){
     const description = sections[Object.keys(sections)[Object.keys(sections).length - 1]];
-    console.log(description)
     const x = description.split(".");
     if (x.length >= 2) {
       return x[0] + "." + x[1] + ".";
     }
     return x[0];
     } else {
-      console.log("user not found")
-      return "No description"
+      return "No description";
     }
   }
 
