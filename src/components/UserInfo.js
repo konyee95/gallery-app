@@ -15,14 +15,18 @@ class UserInfo extends Component {
   }
 
   getProfileDescription(sections) {
-    const description =
-      sections[Object.keys(sections)[Object.keys(sections).length - 1]];
-
+    if (Object.keys(sections).length !== 0){
+    const description = sections[Object.keys(sections)[Object.keys(sections).length - 1]];
+    console.log(description)
     const x = description.split(".");
     if (x.length >= 2) {
       return x[0] + "." + x[1] + ".";
     }
     return x[0];
+    } else {
+      console.log("user not found")
+      return "No description"
+    }
   }
 
   getProfilePicture(images) {
@@ -41,7 +45,6 @@ class UserInfo extends Component {
       sections,
       location,
       occupation,
-      twitter,
       url
     } = this.props.user;
     return (
@@ -164,15 +167,17 @@ class UserInfo extends Component {
                       </Typography>
                     </Grid>
                     <Grid item>
-                      <div className="detailIcon">
-                        <PagesIcon fontSize="large" color="secondary" />
-                      </div>
+                      <a href={url}>
+                        <div className="detailIcon">
+                          <PagesIcon fontSize="large" color="secondary" />
+                        </div>
+                      </a>
                       <Typography
                         variant="h6"
                         align="center"
                         color="textPrimary"
                       >
-                        {twitter}
+                        Link to Profile
                       </Typography>
                     </Grid>
                   </Grid>
