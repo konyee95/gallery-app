@@ -55,9 +55,6 @@ class ProjectDetail extends Component {
 
   renderProject() {
     const projects = this.props.projects;
-    if(projects.length === 0) {
-      return <CircularProgress color="primary" />;
-    }
     return projects.map(project => (
       <Card
         key={project.id}
